@@ -1,0 +1,68 @@
+// ใช้ตรวจสอบเวอชั่น
+docker -v
+
+// ใช้ตรวจสอบว่าทำงานได้ถูกต้องไหม
+docker run hello-world
+
+// ใช้ตรวจสอบสถานะคอนเทนเนอร์ที่กำลังทำงานอยู่ในระบบ
+docker ps --all
+
+//ตรวจสอบรายการอิมเมจทั้งหมดที่มีในระบบ
+docker images
+
+//
+docker run busybox ping google.com
+
+//
+docker stop <container_id_or_name>
+
+//
+docker pull <image_name>
+
+//
+docker create busybox ping google.com
+
+//
+docker ps
+
+//ลบ
+docker rm <container_id_or_name>
+
+//ห้ามใช้เพราะมันจะลบทุกอย่าง 
+docker system prune
+
+//ใช้เพื่อรันคอนเทนเนอร์ที่ใช้ภาพ 
+docker run nginx
+
+//เพื่อเข้ามิติอื่น
+docker exec -it <container_id_or_name> sh
+
+//เพื่อเข้ามิติอื่นและbash
+docker exit -it <container_id_or_name> bash
+
+//
+cd /user/share/nginx/html
+cat index.html
+
+//
+docker run -d -p 8000:80 nginx
+
+//
+docker images
+
+//
+docker image rm <image_id_or_name>
+
+docker pull worldpress
+docker pull mysql:5.7
+docker pull phpmyadmin/phpmyadmin
+
+//สร้างเน็ตเวิร์ค
+docker network create wordpress
+
+//ตรวจสอบเน็ตเวิร์ค
+docker network ls
+
+docker run --name mysql --network wordpress -e MYSQL_ROOT_PASSWORD=1111 -e MYSQL_DATABASE=wordpress_db -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=wordpress -d mysql:5.7
+docker run --name pma --network wordpress -p 8888:80 -e PMA_ARBITRARY=1 -d phpmyadmin/phpmyadmin
+docker run -d --name wordpress --network wordpress -p 888:80 -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress_db wordpress
